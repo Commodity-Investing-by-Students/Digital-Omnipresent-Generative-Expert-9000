@@ -21,7 +21,7 @@ def is_heading(line, font_sizes):
     return all(size > HEADING_FONT_SIZE for size in font_sizes)
 
 def is_text(line, prev_line_type) :
-    return not (line.startswith("[IMG]") or prev_line_type == "is_citation")  # Assuming "[IMG]" indicates an embedded image
+    return not (line.startswith("[IMG]") or prev_line_type != "is_citation")  # Assuming "[IMG]" indicates an embedded image
 
 def is_citation(line, prev_line_type):
     return bool(re.match(r"^\[\d+\]", line) or prev_line_type == "is_citation")

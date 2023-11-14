@@ -1,6 +1,8 @@
 import re
 import os
+import subprocess
 
+import pdfminer
 from pdfminer.high_level import extract_pages
 from pdfminer.layout import LTTextContainer, LTChar, LTImage, LTFigure, LTPage
 from enum import Enum, auto
@@ -21,7 +23,7 @@ def is_heading(line, font_sizes):
     return all(size > HEADING_FONT_SIZE for size in font_sizes)
 
 def is_text(line, prev_line_type) :
-    return not (line.startswith("[IMG]") or prev_line_type != "is_citation")  # Assuming "[IMG]" indicates an embedded image
+    return not (prev_line_type == "is_citation")  # Assuming "[IMG]" indicates an embedded image
 
 def is_citation(line, prev_line_type):
     return bool(re.match(r"^\[\d+\]", line) or prev_line_type == "is_citation")
@@ -57,6 +59,7 @@ def save_image_or_figure(element, image_counter, image_folder):
         image_path = os.path.join(image_folder, image_filename)
         with open(image_path, 'wb') as f:
             f.write(element.stream.get_rawdata())
+            print("Wrote image.")
         return image_filename
     return None
 
@@ -64,20 +67,29 @@ def extract_images_from_element(element, image_counter, image_folder):
     """Recursively traverse the PDF element tree to extract images."""
     if isinstance(element, LTImage):
         # Direct image found, save it
+        print("LTImage found at this call (1st if statment)")
         return save_image_or_figure(element, image_counter, image_folder)
     elif isinstance(element, LTFigure):
         # Figure found, look for nested images
+        print("Figure found at this call.")
         for child in element:
             result = extract_images_from_element(child, image_counter, image_folder)
             if result:  # If an image is found within the figure
+                print("Image found in figure at this call.")
                 return result
+    """
     elif isinstance(element, LTPage):
         # Page found, look for images or figures in all sub-elements
         for child in element:
             result = extract_images_from_element(child, image_counter, image_folder)
             if result:  # If an image is found within the page
-                return result
+                print("Image found at this call.")
+                return save_image_or_figure(element, image_counter, image_folder)
     # No image found in this element
+    print("Image not found at this call.")
+    """
+
+    print("Image not found at this call.")
     return None
 
 def add_image(latex_content, image_filename):
@@ -99,18 +111,14 @@ def read_through_pdf(pdf_path):
     for page_layout in extract_pages(pdf_path):
         for element in page_layout:
 
-            image_filename = extract_images_from_element(element, image_counter, IMAGE_FOLDER)
-            if image_filename:  # If an image was found and saved
-                add_image(latex_content, image_filename)
-                prev_line_type = LineType.IMAGE
-                image_counter += 1
-
+            """
             if isinstance(element, (LTImage, LTFigure)):  # Check for both image and figure
                 image_filename = save_image_or_figure(element, image_counter, IMAGE_FOLDER)
                 if image_filename:  # If an image was found and saved
                     add_image(latex_content, image_filename)
                     prev_line_type = LineType.IMAGE
                     image_counter += 1
+            """
 
             if isinstance(element, LTTextContainer): # For remaining text elements
 
@@ -141,6 +149,13 @@ def read_through_pdf(pdf_path):
 
             latex_content.append("\n")    
 
+            image_filename = extract_images_from_element(element, image_counter, IMAGE_FOLDER)
+            if image_filename:  # If an image was found and saved
+                add_image(latex_content, image_filename)
+                prev_line_type = LineType.IMAGE
+                image_counter += 1
+
+
     add_end(latex_content)
     return '\n'.join(latex_content)
 
@@ -153,6 +168,13 @@ def convert(pdf_filename):
         file.write(pdf_content)
     
     return tex_filename
+
+def compile_latex(file_name):
+    try:
+        subprocess.run(['pdflatex', f'{file_name}'], check=True)
+        print("Compilation successful. Check for PDF")
+    except subprocess.CalledProcessError as e:
+        print(f"Error during compilation: {e}")
 
 if __name__ == "__main__":
     inputfile = input("Please input .pdf file: ")

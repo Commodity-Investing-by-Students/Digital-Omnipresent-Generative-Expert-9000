@@ -1,0 +1,26 @@
+ETF Ticker Symbol,Commodity of ETF,Order Type (Open/Close type),Enter Market Date,Exit Market Date / Date Trade Concluded,Number of Shares Placed,Price Entered,Price Exited,Trade P/L (USD)
+UNG,Natural Gas,Market/Stop,11/30/2023,12/6/2023,1648,$6.00 ,$5.05 ,"-$856.96"
+CANE,Sugar,Market,11/30/2023,11/30/2023,685,$14.89 ,$14.70 ,-$129.47
+CPER,Copper,Market,11/16/2023,11/27/2023,358,$23.13 ,$23.50 ,$133.52
+UNG,Natural Gas,Market,11/16/2023,11/16/2023,2000,$6.34 ,$6.00 ,$680.00
+BNO,Brent Oil,Market/Stop,10/20/2023,11/8/2023,525,$32.49 ,$28.50 ,"$2,094.75"
+UGA,Gasoline,Limit/Stop,10/19/2023,11/1/2023,43,$65.84 ,$62.00 ,$165.12
+SOYB,Soybean,Stop,10/23/2023,10/25/2023,641,$27.30 ,$27.43 ,-$83.33
+CPER,Copper,Limit/Stop,9/28/2023,9/29/2023,1076,$22.84 ,$23.25 ,-$441.16
+WEAT,Wheat,Market/Stop,9/28/2023,9/29/2023,1605,$5.81 ,$5.55 ,$417.30
+CANE,Sugar,Market/Stop,9/21/2023,10/6/2023,557,$14.86 ,$14.34 ,$289.64
+UNG,Natural Gas,Market/Market,10/5/2023,8/23/2023,2000,$7.05 ,$6.61 ,$880.00
+USO,West Texas Intermediate (WTI) Oil,Market/Stop,9/7/2023,9/14/2023,298,$78.37 ,$80.64 ,-$676.46
+CORN,Corn,Market/Stop,9/7/2023,9/13/2023,1784,$22.35 ,$22.18 ,$303.28
+UGA,Gasoline,Limit/Market,9/7/2023,9/11/2023,129,$71.85 ,$74.17 ,-$299.28
+BNO,Brent Oil,Market/Stop,9/8/2023,3/31/2023,700,$30.98 ,$26.50 ,"$3,136.00"
+USO,West Texas Intermediate (WTI) Oil,Market/Stop,3/23/2023,3/29/2023,233,$62.50 ,$65.01 ,-$584.83
+CORN,Corn,Market/Stop,3/23/2023,4/10/2023,338,$24.56 ,$24.53 ,$10.14
+BAL,Cotton,Market/Stop,3/23/2023,4/4/2023,61,$56.31 ,$57.85 ,-$93.94
+SLV,Silver,Market/Limit,3/30/2023,4/4/2023,384,$21.68 ,$22.40 ,-$276.48
+SOYB,Soybean,Limit/Stop,3/22/2023,3/21/2023,500,$26.80 ,$27.43 ,-$315.00
+CPER,Copper,Limit,3/16/2023,3/20/2023,517,$23.50 ,$24.10 ,-$310.20
+UGA,Gasoline,Market/Stop,3/2/2023,3/13/2023,75,$59.60 ,$56.76 ,$213.00
+SOYB,Soybean,Market,3/2/2023,3/23/2023,500,$27.50 ,$25.98 ,$760.00
+WEAT,Wheat,Market,9/30/2022,2/9/2023,1858,$9.32 ,$7.80 ,"$2,824.16"
+COW,Cattle,Limit,12/8/2022,2/1/2023,325,$39.20 ,$40.50 ,-$422.50

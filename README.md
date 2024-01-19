@@ -29,7 +29,7 @@ Once you have your OpenAI API key, you need to fill it in the necessary files:
 
 - `Agent.py`: Similarly, find the variable `openai_api_key` in `Agent.py` and replace `YOUR_API_KEY_HERE` with your API key.
 
-4. **Running Doge 9000**
+## Running Doge 9000
 
 You're now ready to run Doge 9000. To start the GUI interface, open a terminal and run the following command:
 

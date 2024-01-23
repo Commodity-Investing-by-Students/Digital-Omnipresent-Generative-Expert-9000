@@ -17,11 +17,10 @@ OPEN_AI_KEY = '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'
 doge_avatar = 'DogePDF.jpg'
 icon = Image.open(doge_avatar)
 
-doge_file_path = r'C:\Users\mcovi\source\repos\Glados-tts\ascii-art.txt'
 mpv = r'c:\Users\mcovi\source\repos\bootstrapper\mpv.exe'
-background_music = r'C:\Users\mcovi\source\repos\Glados-tts\sounds\background_music.mp3'
+background_music = r'sounds\background_music.mp3'
 
-unidecode = r'C:\Users\mcovi\source\repos\Glados-tts\.venv\Lib\site-packages\unidecode'
+unidecode = r'.venv\Lib\site-packages\unidecode'
 sys.path.append(unidecode)
 
 client = OpenAI(api_key = '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')
@@ -34,7 +33,7 @@ def start():
 
 def shutdown(mpv_background_music):
 
-    playsound(r'C:\Users\mcovi\source\repos\Glados-tts\sounds\shutdown.wav')
+    playsound(r'sounds\shutdown.wav')
     mpv_background_music.terminate()
     subprocess.call('cls', shell=True)
 
@@ -111,8 +110,8 @@ def main():
 
     if "background_music" not in st.session_state:
         st.session_state.background_music = start() 
-        subprocess.Popen([mpv, '--vo=null', '--quiet', r'C:\Users\mcovi\source\repos\Glados-tts\sounds\effect.mp3'], creationflags=subprocess.CREATE_NO_WINDOW)
-        subprocess.Popen([mpv, '--vo=null', '--quiet', r'C:\Users\mcovi\source\repos\Glados-tts\sounds\voice.wav'], creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.Popen([mpv, '--vo=null', '--quiet', r'sounds\effect.mp3'], creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.Popen([mpv, '--vo=null', '--quiet', r'sounds\voice.wav'], creationflags=subprocess.CREATE_NO_WINDOW)
     
 
     # Initialize session state for messages if not already present
@@ -144,7 +143,7 @@ def main():
         shutdown(st.session_state.background_music)  
         st.session_state.background_music = None  
 
-        directory_path = r'C:\Users\mcovi\source\repos\Glados-tts\output_files'
+        directory_path = r'output_files'
 
         for filename in os.listdir(directory_path):
             file_path = os.path.join(directory_path, filename)
@@ -168,7 +167,7 @@ def main():
             shutdown(st.session_state.background_music)  
             st.session_state.background_music = None  
 
-            directory_path = r'C:\Users\mcovi\source\repos\Glados-tts\output_files'
+            directory_path = r'output_files'
 
             for filename in os.listdir(directory_path):
                 file_path = os.path.join(directory_path, filename)

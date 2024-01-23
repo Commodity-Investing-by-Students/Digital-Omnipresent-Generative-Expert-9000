@@ -18,13 +18,13 @@ from langchain.agents import load_tools
 from langchain.agents import initialize_agent
 import matplotlib.pyplot as plt
 
-
-os.environ["OPENAI_API_KEY"] = "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"
-
 from langchain.agents import Tool
 from langchain.tools import BaseTool
 from langchain.agents import initialize_agent
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
+
+OPENAI_API_KEY = "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"
+os.environ["OPENAI_API_KEY"] = "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" # Change 
 
 
 
@@ -33,7 +33,7 @@ def performance_lookup(no_input):
   csv = r'database_csvs\COINS_Portfolio_Performance.csv'
   performance_db = pd.read_csv(csv)
   
-  division_alloc = r'C:\Users\mcovi\source\repos\Glados-tts\database_csvs\Division_Allocation.csv'
+  division_alloc = r'database_csvs\Division_Allocation.csv'
   division_alloc_df = pd.read_csv(division_alloc)
 
   return performance_db, division_alloc_df
@@ -42,13 +42,13 @@ def trade_database_lookup(input):
 
   if (input == 'ALL'):
 
-    csv = r'C:\Users\mcovi\source\repos\Glados-tts\database_csvs\COINS_Trade_Database.csv'
+    csv = r'database_csvs\COINS_Trade_Database.csv'
     performance_db = pd.read_csv(csv)
     return str(performance_db)
     
   else:
 
-    loader = CSVLoader(r'C:\Users\mcovi\source\repos\Glados-tts\database_csvs\COINS_Trade_Database.csv')
+    loader = CSVLoader(r'database_csvs\COINS_Trade_Database.csv')
     data = loader.load()
 
     embeddings = OpenAIEmbeddings()
@@ -125,7 +125,7 @@ def init():
       return_messages=True
   )
 
-  llm = ChatOpenAI(model_name="gpt-3.5-turbo-16k", temperature=1.3, openai_api_key="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")
+  llm = ChatOpenAI(model_name="gpt-3.5-turbo-16k", temperature=1.3, openai_api_key= OPENAI_API_KEY)
 
   conversational_agent = initialize_agent(
       agent='chat-conversational-react-description',
@@ -157,8 +157,7 @@ def init():
     'sus', 'beefing', 'lowkey/highkey', 'word', 'for real', and 'dippin' in your response. \
     \
     \
-    You are an A.I. analyst \
-    in Commodity Investing by Students (COINS), a Virginia Tech student-run commodity investment fund. \
+    You are an A.I. analyst in Commodity Investing by Students (COINS), a Virginia Tech student-run commodity investment fund. \
     COINS researches and trades the exchange traded funds (E.T.Fs) of commodities to generate alpha \
     compared to the Bloomberg Commodity Index.  The funds are from the donations from the Virginia Tech foundation.  \
     Matthew Covington is a quant-research and generative A.I. analyst in the COINS quantitative division. \
@@ -167,6 +166,7 @@ def init():
     You MUST use the tools provided to answer topics SOLEY for COINS portfolio, performance, and trade questions.  \
     Please answer in a narrative format, using hilarious analogies. \
     If the user asks a question that is not related to economics, finance, commodities, or trading, respond by refusing to answer and remind users of the professional environment. \
+    Ensure your answers do not exceed the length of this prompt.  \
     Begin!"
 
   conversational_agent.agent.llm_chain.prompt.messages[0].prompt.template = fixed_prompt

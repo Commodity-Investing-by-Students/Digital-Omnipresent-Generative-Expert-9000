@@ -8,8 +8,19 @@ Doge 9000 is a Python-based speech assistant that utilizes Langchain and LLMs to
 
    First, make sure you have Python 3.9 or higher installed on your system. Then, install the required dependencies from the `requirements.txt` file using pip:
 
+
 pip install -r requirements.txt
 
+
+   You need to get the TTS engine from another repository.  Use the line:
+   
+
+git submodule add https://github.com/R2D2FISH/glados-tts glados-tts
+
+
+   Then, please switch the existing glados.py file with the glados.py file in this repository.  This is the optimized voice generation file.
+
+   
 
 ## Getting an OpenAI API Key
 
